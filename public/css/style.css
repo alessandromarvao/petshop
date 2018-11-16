@@ -1,0 +1,58 @@
+body{
+	background-color: rgb(215, 215, 215);
+	background-image: url(/img/paw-print.png);
+	background-size: 70%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+hr{
+	border-top:1px solid #b3b3b3
+}
+/* body{
+	background-image: url('/img/notebook-pen-table-blank-158771.jpeg');
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+.page{
+	background-color: rgba(255,255,255, .5);
+	background-image: url(/img/ifma.png);
+	background-position: left 120px;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+} */
+.left{
+	margin-top: -10px;
+	margin-left: 20px;
+	float: left;
+}
+.right{
+	margin-top: 15px;
+	margin-right: 20px;
+	float: right;
+}
+.central{
+	margin-top: 60px;
+}
+.form-width{
+	width: 100%;
+}
+/* Para o botão Novo */
+.btn-novo{
+	margin-bottom: 10px;
+	margin-top: 15px;
+}
+.botton-line{
+	margin-top: -8px;
+	margin-bottom: 15px;
+}
+.buttom-index{
+	padding-top: 50px;
+	padding-bottom: 100px;
+}
+.footer-text{
+	color: gray;
+}

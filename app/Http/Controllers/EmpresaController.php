@@ -43,6 +43,7 @@ class EmpresaController extends Controller
         ];
 
         $empresa = Empresa::create($input);
+        echo "ok";
     }
 
     /**
@@ -95,9 +96,9 @@ class EmpresaController extends Controller
      * 
      * @return bool Verdadeiro se não houver empresa cadastrada e False se houver.
      */
-    public function isNull(){
+    public function checkEmpresa(){
         if(Empresa::all()->count()==0){
-            return true;
+            return view('empresa.create');
         } else {
             return false;
         }

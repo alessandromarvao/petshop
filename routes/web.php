@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'EmpresaController@checkEmpresa');
+
+Route::resources([
+    'empresa' => 'EmpresaController'
+]);
+
