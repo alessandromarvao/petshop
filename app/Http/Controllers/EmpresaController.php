@@ -43,7 +43,7 @@ class EmpresaController extends Controller
         ];
 
         $empresa = Empresa::create($input);
-        echo "ok";
+        return view('default');
     }
 
     /**
@@ -100,7 +100,7 @@ class EmpresaController extends Controller
         if(Empresa::all()->count()==0){
             return view('empresa.create');
         } else {
-            return false;
+            return view('default');
         }
     }
 }

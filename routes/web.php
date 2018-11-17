@@ -18,6 +18,7 @@
 Route::get('/', 'EmpresaController@checkEmpresa');
 
 Route::resources([
-    'empresa' => 'EmpresaController'
+    'empresa' => 'EmpresaController',
+    'produto' => 'ProdutoController'
 ]);
 
