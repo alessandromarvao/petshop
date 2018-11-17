@@ -23,7 +23,7 @@
 				<div class="navbar-right">
 					<a class="navbar-brand" href="/#">Vender</a>
 					<a class="navbar-brand" href="/#">Comprar</a>
-					<a class="navbar-brand" href="/#">Produtos</a>
+					<a class="navbar-brand" href="/produto">Produtos</a>
 				</div>
 			</div>
 		</div>

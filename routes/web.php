@@ -16,6 +16,7 @@
 // });
 
 Route::get('/', 'EmpresaController@checkEmpresa');
+Route::get('/produto/get_datatable', 'ProdutoController@getDatatable');
 
 Route::resources([
     'empresa' => 'EmpresaController',
