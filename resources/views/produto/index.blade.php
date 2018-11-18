@@ -3,13 +3,16 @@
 @section('content')
 <div class="panel central">
     <div class="panel-body">
+        <h2>Produtos</h2>
+        <hr>
         <table class="table" id="tb-produtos">
             <thead>
                 <tr>
-                    <th>Quantidade</th>
+                    <th>Código de Barras</th>
                     <th>Produto</th>
                     <th>Tipo</th>
                     <th>Tamanho</th>
+                    <th>Quantidade</th>
                     <th>Valor</th>
                 </tr>
             </thead>
@@ -30,10 +33,11 @@
                 serverSide: true,
                 ajax: 'http://localhost/produto/get_datatable',
                 columns : [
-                    {data: 'quantidade'},
+                    {data: 'cod_barras'},
                     {data: 'nome'},
                     {data: 'tipo'},
                     {data: 'tamanho'},
+                    {data: 'quantidade'},
                     {data: 'valor_venda'}
                 ]
             });

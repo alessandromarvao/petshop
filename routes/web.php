@@ -17,9 +17,12 @@
 
 Route::get('/', 'EmpresaController@checkEmpresa');
 Route::get('/produto/get_datatable', 'ProdutoController@getDatatable');
+Route::get('/compra/get_datatable', 'CompraController@getDatatable');
 
 Route::resources([
     'empresa' => 'EmpresaController',
-    'produto' => 'ProdutoController'
+    'produto' => 'ProdutoController',
+    'compra' => 'CompraController',
+    'compras_de_produtos' => 'ComprasDeProdutosController'
 ]);
 

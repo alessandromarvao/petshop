@@ -13,8 +13,7 @@ class Compra extends Model
     protected $fillable = [
         'nota_fiscal',
         'data_compra',
-        'valor_total',
-        'data_vencimento'
+        'valor_total'
     ];
 
     //Aponta para o relacionamento entre esta e a tabela Empresas (chave estrangeira)
