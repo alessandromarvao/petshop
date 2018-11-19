@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\Datatables\Facades\Datatables;
 
 class ComprasDeProdutosController extends Controller
 {
@@ -11,9 +12,32 @@ class ComprasDeProdutosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        print_r(($request->session()->get('produtos')));
+    }
+
+    public function set_session(Request $request, $id, $quantidade, $valor)
+    {
+        $total = 0;
+        // $request->session()->flush();
+        $array = [
+            'id' => $id,
+            'quantidade' => $quantidade,
+            'valor' => implode('.',explode(',',$valor))
+        ];
+        $request->session()->push('produtos', $array);
+        foreach($request->session()->get('produtos') as $row){
+            $total = $total + ($row['valor'] * $row['quantidade']); 
+        }
+
+        return $total;
+    }
+
+    public function flush_session(Request $request){
+        $request->session()->flush();
+
+        return true;
     }
 
     /**

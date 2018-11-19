@@ -29,7 +29,7 @@
 		</div>
 	</nav>
 	<main>
-		<section class="container central">
+		<section class="container-fluid central">
 			@yield('content')
 		</section>
 	</main>

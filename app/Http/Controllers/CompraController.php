@@ -21,6 +21,7 @@ class CompraController extends Controller
     public function getDatatable(){
         $produtos = Compra::get();
         return Datatables::of($produtos)->make(true);
+        // return $produtos;
     }
 
     /**

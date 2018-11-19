@@ -59,12 +59,14 @@ class ProdutoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $cod_barras
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cod_barras)
     {
-        //
+        $produto = Produto::where('cod_barras', $cod_barras);
+
+        return Datatables::of($produto)->make(true);
     }
 
     /**

@@ -18,6 +18,8 @@
 Route::get('/', 'EmpresaController@checkEmpresa');
 Route::get('/produto/get_datatable', 'ProdutoController@getDatatable');
 Route::get('/compra/get_datatable', 'CompraController@getDatatable');
+Route::get('/compras_de_produtos/set_session/{id}/{quantidade}/{valor}', 'ComprasDeProdutosController@set_session');
+Route::get('/compras_de_produtos/flush', 'ComprasDeProdutosController@flush_session');
 
 Route::resources([
     'empresa' => 'EmpresaController',
