@@ -69,8 +69,9 @@
 <script src="/js/ajax.js"></script>
 <script>
     //Limpa sessão ao fechar a página
-    window.onbeforeunload = function() {
+    window.onload = function() {
         $.get('/compras_de_produtos/flush');
+        alert('ok');
     };
 </script>
 @endpush

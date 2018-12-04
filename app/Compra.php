@@ -11,6 +11,7 @@ class Compra extends Model
     
     //Variável que recebe as colunas da tabela. Muito útil para os métodos INSERT e UPDATE pelo Laravel.
     protected $fillable = [
+        'empresa_id',
         'nota_fiscal',
         'data_compra',
         'valor_total'

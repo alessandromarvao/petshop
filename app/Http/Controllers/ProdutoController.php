@@ -47,6 +47,7 @@ class ProdutoController extends Controller
             'nome' => $request->input('nome'),
             'tipo' => $request->input('tipo'),
             'tamanho' => $request->input('tamanho'),
+            'validade' => $request->validade,
             'quantidade' => $request->input('quantidade'),
             'cod_barras' => $request->input('cod_barras'),
             'valor_venda' => implode('.', explode(',', $request->input('valor_venda')))
@@ -76,7 +77,7 @@ class ProdutoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {        
         //
     }
 
@@ -89,7 +90,25 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $produto = Produto::FindOrFail($id);
+
+        // $valor_venda = 0;
+        
+        // if(!empty($request->input('valor_venda'))){
+        //     $valor_venda = $request->input('valor_venda');
+        // } else {
+        //     $valor_venda = $produto->valor_venda;
+        // }
+
+        // $input = [
+        //     '_method' => $request->input('_method'),
+        //     '_token' => $request->input('_token'),
+        //     'quantidade' => $request->input('quantidade'),
+        //     'cod_barras' => $request->input('cod_barras'),
+        //     'valor_venda' => implode('.', explode(',', $request->input('valor_venda')))
+        // ];
+
+        // return $produto->update($input);
     }
 
     /**

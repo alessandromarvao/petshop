@@ -23,6 +23,9 @@
                 <option value="Grande">Grande</option>
             </select>
             <br>
+            <label for="validade">Data de vencimento:</label>
+            <input type="date" name="validade" id="validade" class="form-control">
+            <br>
             <label for="quantidade">Quantidade em estoque:</label>
             <input type="text" name="quantidade" id="quantidade" class="form-control">
             <br>

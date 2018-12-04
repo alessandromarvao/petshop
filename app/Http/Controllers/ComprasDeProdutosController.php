@@ -15,6 +15,10 @@ class ComprasDeProdutosController extends Controller
     public function index(Request $request)
     {
         print_r(($request->session()->get('produtos')));
+        // foreach($request->session()->get('produtos') as $row){
+        //     echo "Id:" . $row['id'] . "<br>";
+        //     echo "Valor:" . $row['valor'] . "<br>";
+        // }
     }
 
     public function set_session(Request $request, $id, $quantidade, $valor)
@@ -58,7 +62,42 @@ class ComprasDeProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Inicia a transação do BD
+        DB::transaction(function(){
+            //Armazena os dados da compra em geral
+            DB::table('compra')->create([
+                '_method' => $request->input('_method'),
+                '_token' => $request->input('_token'),
+                'nota_fiscal' => $request->input('nota_fiscal'),
+                'data_compra' => $request->input('data_compra'),
+                'valor_total' => $request->input('valor_total')
+            ]);
+    
+            foreach($request->session()->get('produtos') as $row){
+                //Armazena os dados da compra de cada um produto
+                $compraProduto = ComprasDeProdutos::create([
+                    '_method' => $request->input('_method'),
+                    '_token' => $request->input('_token'),
+                    'compra_id' => DB::getPdo()->lastInsertId(),
+                    'produto_id' => $row['id'],
+                    'valor_custo' => $row['valor'],
+                ]);
+    
+                //Atualiza a quantidade de itens do produto no estoque
+                $produto = Produto::findOrFail($row['id']);
+                $produto->quantidade = $produto->quantidade + $row['quantidade'];
+                $produto->save();
+            }
+        }, 5);
+
+
+        // $compraProduto = ComprasDeProdutos::create([
+        //     '_method' => $request->input('_method'),
+        //     '_token' => $request->input('_token'),
+        //     'quantidade' => $request->input('quantidade'),
+        //     'valor_custo' => $request->input('valor_custo'),
+        //     '_token' => $request->input('_token'),
+        // ]);
     }
 
     /**

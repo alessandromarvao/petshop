@@ -16,6 +16,7 @@ class Produto extends Model
         'tipo',
         'quantidade',
         'cod_barras',
+        'validade',
         'valor_venda'
     ];
 

@@ -13,7 +13,8 @@
                     <th>Tipo</th>
                     <th>Tamanho</th>
                     <th>Quantidade</th>
-                    <th>Valor</th>
+                    <th>Validade</th>
+                    <th>Valor (R$)</th>
                 </tr>
             </thead>
         </table>
@@ -38,6 +39,7 @@
                     {data: 'tipo'},
                     {data: 'tamanho'},
                     {data: 'quantidade'},
+                    {data: 'validade'},
                     {data: 'valor_venda'}
                 ]
             });

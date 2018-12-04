@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Compra;
+use App\ComprasDeProdutos;
+use App\Produto;
 use Yajra\Datatables\Facades\Datatables;
 
 class CompraController extends Controller
@@ -42,7 +45,34 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Armazena os dados da compra em geral
+        Compra::create([
+            '_token' => $request->input('_token'),
+            'empresa_id' => '1',
+            'nota_fiscal' => $request->input('nota_fiscal'),
+            'data_compra' => $request->input('data_compra'),
+            'valor_total' => $request->input('valor_total')
+        ]);
+        $id =  DB::getPdo()->lastInsertId();
+
+        foreach($request->session()->get('produtos') as $row){
+            //Armazena os dados da compra de cada um produto
+            $compraProduto = ComprasDeProdutos::create([
+                '_token' => $request->input('_token'),
+                'compra_id' => $id,
+                'produto_id' => $row['id'],
+                'valor_custo' => $row['valor'],
+            ]);
+
+            //Atualiza a quantidade de itens do produto no estoque
+            $produto = Produto::findOrFail($row['id']);
+            $produto->quantidade = $produto->quantidade + $row['quantidade'];
+            $produto->save();
+        }
+        
+        $request->session()->flush();
+        
+        return view('compra.index');
     }
 
     /**

@@ -3,10 +3,12 @@
 //Exibe a descrição do produto a partir do código de barras selecionado
 function get_produto(){
     id_cod_barras = $('input[name=cod_barras]').val();
-    $.get('/produto/' + id_cod_barras, function(produtos){
-        $('input[name=nome]').val(produtos['data'][0]['nome']);
-        $('input[name=id]').val(produtos['data'][0]['id']);        
-    });
+    if(id_cod_barras !== ''){
+        $.get('/produto/' + id_cod_barras, function(produtos){
+            $('input[name=nome]').val(produtos['data'][0]['nome']);
+            $('input[name=id]').val(produtos['data'][0]['id']);       
+        });
+    }
 }
 
 function add_produto(link){
