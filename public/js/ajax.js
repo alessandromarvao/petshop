@@ -1,12 +1,15 @@
 
 
 //Exibe a descrição do produto a partir do código de barras selecionado
-function get_produto(){
+function get_produto(tipo){
     id_cod_barras = $('input[name=cod_barras]').val();
     if(id_cod_barras !== ''){
         $.get('/produto/' + id_cod_barras, function(produtos){
             $('input[name=nome]').val(produtos['data'][0]['nome']);
             $('input[name=id]').val(produtos['data'][0]['id']);       
+            if(tipo=='venda'){
+                $('input[name=valor]').val(produtos['data'][0]['valor_venda']);
+            }
         });
     }
 }
@@ -16,7 +19,7 @@ function add_produto(link){
     var cod_barras = $('input[name=cod_barras]').val(); 
     var nome = $('input[name=nome]').val(); 
     var qtde = $('input[name=quantidade]').val();
-    var valor = $('input[name=valor_custo]').val();
+    var valor = $('input[name=valor]').val();
 
     $.get(link + id + '/' + qtde + '/' + valor, function(produto){
         var markup = "<tr><td>" + cod_barras + "</td><td>" + nome + "</td><td>" + qtde + "</td><td>" + valor + "</td><td>" + (qtde*valor)+ "</td></tr>";
@@ -26,6 +29,6 @@ function add_produto(link){
     $('input[name=cod_barras]').val('');
     $('input[name=cod_barras]').focus();
     $('input[name=nome]').val('');
-    $('input[name=valor_custo]').val('');
+    $('input[name=valor]').val('');
     $('input[name=quantidade]').val('');
 }

@@ -22,7 +22,7 @@
 					<a class="navbar-brand glyphicon glyphicon-home" href="/" ></a>
 				</div>
 				<div class="navbar-right">
-					<a class="navbar-brand" href="/#">Vender</a>
+					<a class="navbar-brand" href="/venda">Vender</a>
 					<a class="navbar-brand" href="/compra">Comprar</a>
 					<a class="navbar-brand" href="/produto">Produtos</a>
 				</div>

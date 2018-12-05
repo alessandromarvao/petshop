@@ -61,6 +61,7 @@ class CompraController extends Controller
                 '_token' => $request->input('_token'),
                 'compra_id' => $id,
                 'produto_id' => $row['id'],
+                'quantidade' => $row['quantidade'],
                 'valor_custo' => $row['valor'],
             ]);
 

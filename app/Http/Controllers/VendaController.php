@@ -3,45 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Venda;
+use App\VendasDeProdutos;
+use App\Produto;
 use Yajra\Datatables\Facades\Datatables;
 
-class ComprasDeProdutosController extends Controller
+class VendaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        print_r(($request->session()->get('produtos')));
-        // foreach($request->session()->get('produtos') as $row){
-        //     echo "Id:" . $row['id'] . "<br>";
-        //     echo "Valor:" . $row['valor'] . "<br>";
-        // }
+        return view('venda.index');
     }
 
-    public function set_session(Request $request, $id, $quantidade, $valor)
-    {
-        $total = 0;
-        // $request->session()->flush();
-        $array = [
-            'id' => $id,
-            'quantidade' => $quantidade,
-            'valor' => implode('.',explode(',',$valor))
-        ];
-        $request->session()->push('produtos', $array);
-        foreach($request->session()->get('produtos') as $row){
-            $total = $total + ($row['valor'] * $row['quantidade']); 
-        }
-
-        return $total;
-    }
-
-    public function flush_session(Request $request){
-        $request->session()->flush();
-
-        return true;
+    public function getDatatable(){
+        $produtos = Venda::get();
+        return Datatables::of($produtos)->make(true);
     }
 
     /**
@@ -51,7 +33,7 @@ class ComprasDeProdutosController extends Controller
      */
     public function create()
     {
-        //
+        return view('venda.create');
     }
 
     /**
@@ -62,7 +44,34 @@ class ComprasDeProdutosController extends Controller
      */
     public function store(Request $request)
     {
-       //
+        //Armazena os dados da compra em geral
+        Venda::create([
+            '_token' => $request->input('_token'),
+            'empresa_id' => '1',
+            'valor_total' => $request->input('valor_total'),
+            'data' => date('Y-m-d')
+        ]);
+        $id =  DB::getPdo()->lastInsertId();
+
+        foreach($request->session()->get('produtos') as $row){
+            //Armazena os dados da compra de cada um produto
+            $vendaProduto = VendasDeProdutos::create([
+                '_token' => $request->input('_token'),
+                'venda_id' => $id,
+                'produto_id' => $row['id'],
+                'quantidade' => $row['quantidade'],
+                'valor_venda' => $row['valor'],
+            ]);
+
+            //Atualiza a quantidade de itens do produto no estoque
+            $produto = Produto::findOrFail($row['id']);
+            $produto->quantidade = $produto->quantidade - $row['quantidade'];
+            $produto->save();
+        }
+        
+        $request->session()->flush();
+        
+        return view('venda.index');
     }
 
     /**
